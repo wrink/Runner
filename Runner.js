@@ -10,20 +10,36 @@ var run = function (url, args, callback, callbackOnErr) {
 
 	imports = new JavaImporter(java.net, java.io, java.lang.Runtime)
 	with(imports) {
-
-		var input = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+		//var input = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+		var input = new DataInputStream(new URL(url).openStream());
 
 		var name = url.split('/');
 		name = name[name.length - 1];
 
 		var holder;
-		var contents = input.readLine();
-		while((holder = input.readLine()) !== null) contents += '\n' + holder;
+		//var contents = input.readLine();
+		//while((holder = input.readLine()) !== null) contents += '\n' + holder;
+		var contents = [];
+		var holder;
+		try {
+			while ((holder = input.readByte()) !== undefined) {
+				contents.push(holder);
+			}
+		} catch (e) {
+			if (e instanceof EOFException) {
+				print("done reading")
+			} else {
+				tmp.delete();
+
+				return out(-2, null, [], e.toString().split('\n'))
+			}
+		}
 
 		var tmp = File.createTempFile(name, '.tmp');
 		tmp.setExecutable(true);
 
-		var writer = new FileWriter(tmp);
+		//var writer = new FileWriter(tmp);
+		var writer = new FileOutputStream(tmp);
 		writer.write(contents);
 		writer.flush();
 		writer.close();
@@ -70,5 +86,3 @@ var run = function (url, args, callback, callbackOnErr) {
 		}
 	}
 };
-
-run('https://raw.githubusercontent.com/wrink/executables/master/test.js', [1, 2, 3]);
