@@ -26,16 +26,16 @@ var run = function (url, args, callback, callbackOnErr) {
 				contents.push(holder);
 			}
 		} catch (e) {
-			if (e instanceof EOFException) {
+			if (e instanceof EOFException || e.javaException instanceof EOFException) {
 				print("done reading")
 			} else {
-				tmp.delete();
-
+				print(e)
 				return out(2, null, [], e.toString().split('\n'))
 			}
 		}
 
 		var tmp = File.createTempFile(name, '.tmp');
+
 		tmp.setExecutable(true);
 
 		//var writer = new FileWriter(tmp);
