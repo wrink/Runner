@@ -3,7 +3,7 @@ A URL-based script runner for Nashorn and Rhino
 
 ## How to use Runner  
 Using Runner couldn't be easier. Simply insert the following line into any JS script running on the Java virtual machine to import Runner  
-`load(https://raw.githubusercontent.com/wrink/Runner/master/Runner.js);`  
+`load("https://raw.githubusercontent.com/wrink/Runner/master/Runner.js");`  
 From there on out, all you need to do in order to run an external script is call the `run()` method  
 
 ## Language Support
