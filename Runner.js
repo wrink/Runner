@@ -31,7 +31,7 @@ var run = function (url, args, callback, callbackOnErr) {
 			} else {
 				tmp.delete();
 
-				return out(-2, null, [], e.toString().split('\n'))
+				return out(2, null, [], e.toString().split('\n'))
 			}
 		}
 
@@ -70,8 +70,8 @@ var run = function (url, args, callback, callbackOnErr) {
 			tmp.delete();
 
 			if (errFlag) {
-				if (callback && callbackOnErr) return out(-1, callback(out(-1, null, inputArray, errorArray)), inputArray, errorArray);
-				else return out(-1, null, inputArray, errorArray);
+				if (callback && callbackOnErr) return out(1, callback(out(1, null, inputArray, errorArray)), inputArray, errorArray);
+				else return out(1, null, inputArray, errorArray);
 			} else {
 				if (callback) return out(0, callback(out(0, null, inputArray, [])), inputArray, []);
 				else return out(0, null, inputArray, []);
@@ -81,8 +81,8 @@ var run = function (url, args, callback, callbackOnErr) {
 
 			tmp.delete();
 
-			if (callback && callbackOnErr) return out(1, callback(out(-1, null, [], e.toString().split('\n'))), [], e.toString().split('\n'));
-			else return out(1, null, [], e.toString().split('\n'));
+			if (callback && callbackOnErr) return out(3, callback(out(3, null, [], e.toString().split('\n'))), [], e.toString().split('\n'));
+			else return out(3, null, [], e.toString().split('\n'));
 		}
 	}
 };
